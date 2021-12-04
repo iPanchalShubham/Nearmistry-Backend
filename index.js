@@ -4,6 +4,10 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+
 const app  = express();
 //DOTENV
 dotenv.config({path:'./config.env'})
@@ -27,6 +31,7 @@ mongoose.connect(process.env.MONKEY,{
 }).catch(e =>console.log(e))
 
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 if(process.env.NODE_ENV == "production"){
     app.use(express.static("client/build"));
     app.get('*',(NODE_ENV,res)=>{
