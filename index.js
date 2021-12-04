@@ -5,8 +5,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
 const app  = express();
-//Running on PORT
-const port = process.env.PORT|5000
 //DOTENV
 dotenv.config({path:'./config.env'})
 
@@ -36,4 +34,4 @@ if(process.env.NODE_ENV == "production"){
     })
 }
 
-app.listen(port,()=>console.log(`Application Running on port ${port}`))
+app.listen(process.env.PORT||5000,()=>console.log(`Application Running on port ${port}`))
