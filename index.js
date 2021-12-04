@@ -3,6 +3,7 @@ import routes from './appRoute/routes.js'
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
 const app  = express();
 //Running on PORT
 const port = process.env.PORT|5000
@@ -30,7 +31,6 @@ mongoose.connect(process.env.MONKEY,{
 
 if(process.env.NODE_ENV == "production"){
     app.use(express.static("client/build"));
-    const path = require("path");
     app.get('*',(NODE_ENV,res)=>{
         res.sendFile(path.resolve(__dirname,"client,build",'index.html'));
     })
