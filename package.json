@@ -1,6 +1,10 @@
 {
   "name": "mern_auth",
   "version": "1.0.0",
+  "engines": {
+    "node": "0.12.x",
+    "npm": "2.5.x"
+  },
   "description": "In this project i am going to implement the user registration and authentication using mern stack.",
   "main": "index.js",
   "type": "module",
