@@ -21,7 +21,8 @@ app.use(cors())
 app.use(routes)
 
 // Connection to DB
-mongoose.connect(process.env.MONKEY,{
+const db  = 'mongodb+srv://Shubham:Shubham@cluster0.zrjwh.mongodb.net/user_data?retryWrites=true&w=majority'
+mongoose.connect(process.env.MONGODB_URI||db,{
     useCreateIndex:true,
     useFindAndModify:false,
     useNewUrlParser:true,
