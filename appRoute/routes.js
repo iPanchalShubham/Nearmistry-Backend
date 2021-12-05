@@ -5,7 +5,7 @@ import { postNewVolunteer } from '../controllers/controllers.js';
 //Router 
 const router = express.Router();
 
-router.get('/',getHomePage)
+router.get('/homePage',getHomePage)
 router.post('/newUser',postNewUser)
 router.post('/newVolunteer',postNewVolunteer)
 
