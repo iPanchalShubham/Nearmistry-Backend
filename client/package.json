@@ -14,6 +14,7 @@
     "axios": "^0.24.0",
     "collect": "^0.3.5",
     "create-react-app": "^4.0.3",
+    "dotenv": "^10.0.0",
     "formik": "^2.2.9",
     "formik-material-ui": "^4.0.0-alpha.2",
     "g": "^2.0.1",
@@ -33,7 +34,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "react-scripts start",
     "build": "react-scripts build"
-   
   },
   "keywords": [],
   "author": "",
