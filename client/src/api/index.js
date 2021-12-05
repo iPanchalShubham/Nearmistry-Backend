@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000/'
+const url = 'https://labrecruit.herokuapp.com/'
 
 //Reponse data coming from getHomePage Funtion from our server side.
 export const fetchUsers = () => axios.get(url+'homePage')
