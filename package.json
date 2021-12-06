@@ -4,7 +4,7 @@
   "engines": {
     "node": "16.13.0"
   },
-  "description": "In this project i am going to implement the user registration and authentication using mern stack.",
+  "description": "This project is going to help the unorganised class.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -14,7 +14,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
-  "author": "Shubham panchal",
+  "author": "Shubham Panchal",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

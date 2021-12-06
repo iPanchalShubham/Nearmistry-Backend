@@ -2,7 +2,6 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import User from './user/user.jsx';
 import Grid from '@material-ui/core/Grid';
-import PrimarySearchAppBar from '../navbar/navbar';
 const Users = () => {
     const posts = useSelector(state =>state.users)
     const filterVars = useSelector(state=> state.filterVariables) 

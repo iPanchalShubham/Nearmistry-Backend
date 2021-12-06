@@ -8,6 +8,7 @@ import PrimarySearchAppBar from './components/navbar/navbar';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import LinearBuffer from './components/progress/progress'
 import NewVolunteerReg from './VolunteerRegistration/newVolunteerReg';
+import StickyFooter from './components/footer/footer';
 const App = () => {
 
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const App = () => {
   <Route path = "/VolunteerRegistration" element = {<NewVolunteerReg/>} />
     </Routes>
     </div>
+    <StickyFooter/>
 </Router>
   );
 }

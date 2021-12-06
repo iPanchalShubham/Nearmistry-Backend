@@ -4,7 +4,6 @@ import bcrypt from 'bcryptjs';
 import  {Volunteers}  from '../models/volunteers_model.js';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { sendConfirmationMail } from '../mailService/nodemailerService.js';
 
 //****FETCHING NEW ITEMS****
 export const getHomePage = async(req,res)=>{
