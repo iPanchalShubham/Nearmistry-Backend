@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 export const getHomePage = async(_,res)=>{
     try{
             const Users = await User.find()
+            console.log("In controller.js users fetched.")
              res.json(Users)
     }
         catch(e){

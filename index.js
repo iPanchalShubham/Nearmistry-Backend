@@ -33,7 +33,6 @@ mongoose.connect(process.env.MONGODB_URI||db,{
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 if(process.env.NODE_ENV == "production"){
-    app.use(express.static("client/build"));
     app.use('/volunteerSection',routes)
     app.get('/*', function(_, res) {
         res.sendFile(path.join(__dirname, 'client','build', 'index.html'));
