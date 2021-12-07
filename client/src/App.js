@@ -22,7 +22,7 @@ const App = () => {
     <Routes>
 <Route path='/' element = { <div>
   <PrimarySearchAppBar/>
-  <div style = {{marginTop:'15px'}} >{<Users/>}</div>
+  <div style = {{marginTop:'15px'}} >{state.length>0?<Users/>:LinearBuffer}</div>
 </div> }> </Route>
 <Route path = "/iVolunteer" element = { <Form/>}/>
   <Route path = "/VolunteerRegistration" element = {<NewVolunteerReg/>} />
