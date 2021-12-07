@@ -35,7 +35,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 if(process.env.NODE_ENV == "production"){
     app.use(express.static("client/build"));
     const serverPostPath = path.join(__dirname, 'appRoute/routes.js'); 
-    app.use('/volunteerSection')
+    app.use('/volunteerSection',routes)
 }
 
 app.listen(process.env.PORT||5000,()=>console.log(`Application Running on port ${process.env.PORT}`))
