@@ -18,7 +18,6 @@ app.use(express.urlencoded({ limit: "5mb", extended: true, parameterLimit: 50000
 
 //Middleware Routes
 app.use(cors())
-app.use(routes)
 
 // Connection to DB
 const db  = 'mongodb+srv://Shubham:Shubham@cluster0.zrjwh.mongodb.net/user_data?retryWrites=true&w=majority'
@@ -35,6 +34,7 @@ mongoose.connect(process.env.MONGODB_URI||db,{
 const __dirname = dirname(fileURLToPath(import.meta.url));
 if(process.env.NODE_ENV == "production"){
     app.use(express.static("client/build"));
+    app.use(routes)
     app.get('*',(NODE_ENV,res)=>{
         res.sendFile(path.resolve(__dirname,'client','build','index.html'));
     })

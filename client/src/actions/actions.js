@@ -14,6 +14,7 @@ export const getUsers = () => async(dispatch)=>{//This declaration of methods ca
 export const postUser = (post) => async(dispatch)=>{
     try{
         const {data} = await api.createUser(post)
+        console.log(data)
         dispatch({type:'CREATE_USER',payload:data})
     }catch(e){
         console.log(e.message)
