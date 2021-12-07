@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 //****FETCHING NEW ITEMS****
-export const getHomePage = async(req,res)=>{
+export const getHomePage = async(_,res)=>{
     try{
             const Users = await User.find()
              res.json(Users)
