@@ -2,7 +2,7 @@ import axios from 'axios';
 const url = 'https://labrecruit.herokuapp.com/'
 
 //Reponse data coming from getHomePage Funtion from our server side.
-export const fetchUsers = () => axios.get(url+'homePage')
+export const fetchUsers = () => axios.get(url+'volunteerSection/homePage')
 //Send data to server-side
 export const createUser = (newUserData) => axios.post(url+'volunteerSection/newUser',newUserData)
 //Create new Volunteer
