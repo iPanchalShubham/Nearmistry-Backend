@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import FormDialog from '../modal/modal';
+import FilterModel from '../modal/filter_modal';
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -114,7 +114,7 @@ const  PrimarySearchAppBar = ()=> {
           aria-haspopup="true"
           color="inherit"
         >
-          <FormDialog  />
+          <FilterModel  />
         </IconButton>
       </MenuItem>
     </Menu>
@@ -151,7 +151,7 @@ const  PrimarySearchAppBar = ()=> {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="filterButton" color="inherit">
-            <FormDialog />
+            <FilterModel />
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>
@@ -160,7 +160,7 @@ const  PrimarySearchAppBar = ()=> {
               aria-haspopup="true"
               color="inherit"
             >
-                 <FormDialog  />
+                 <FilterModel  />
             </IconButton>
           </div>
         </Toolbar>

@@ -16,7 +16,7 @@ const Users = () => {
         spacing={5}
         direction="row"
         justifyContent="center"
-        alignItems="flex-start">{posts.filter((profile)=>filterData(profile,filterVars))?.map(post =><Grid item  sm={1} md={4}  key = {post._id} >
+        alignItems="flex-start">{posts.filter((profile)=>filterData(profile,filterVars))?.map(post =><Grid item  sm={1} md={4} lg ={6} key = {post._id} >
             <User User_details = {post}/>
         </Grid>)}</Grid>
         </div>

@@ -6,7 +6,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import PhoneIcon from "@material-ui/icons/Phone";
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import FullInfoModel from '../../modal/full_info_model'
 const useStyles = makeStyles((Theme) =>
   createStyles({
     root: {
@@ -65,7 +65,7 @@ const User = ({ User_details }) => {
             Gender: {User_details.gender}
           </Typography>
             <Button style={{padding:0,margin:0}} >
-          <MoreHorizIcon style={{padding:0}} color = 'primary'/>
+          <FullInfoModel style={{padding:0}} color = 'primary'/>
             </Button>
             
 
