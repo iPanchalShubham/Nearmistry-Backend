@@ -19,25 +19,29 @@ const App = () => {
   const {isLoading} = useSelector(state => state.users)
   const query = useQuery()
   const page = query.get('page') || 1;
-  console.log("I am from App.jsx " + page)
+  const helper = query.get('helper')||'';
+
+  const filterVars = useSelector(state => state.filterVariables)
   useEffect(() => {
-    if (page) {
-      dispatch(getUsers(page))
+    if (page,filterVars) {
+      dispatch(getUsers(page,filterVars))
     }
-  }, [dispatch, page])
-console.log(page)
+  }, [dispatch, page,filterVars])
+
   return (
     <>
     <div className="App">
     <Routes>
-<Route path='/items' exact element = { <div>
+<Route  path='/items' exact element = { <div>
   <PrimarySearchAppBar/>
-  <div style = {{marginTop:'15px'}} >{isLoading?<LinearBuffer/>:<div><Users/><PaginationRounded page = {page}/></div>}</div>
+  <div style = {{margin:'15px 0px',minHeight:"85vh"}} >{isLoading?<LinearBuffer/>:<div><Users/></div>}</div>
+  <PaginationRounded page = {page}/>
 </div> }> </Route>
 
 <Route path='/' exact component= {()=> <Redirect to = "/items"/>}element = { <div>
   <PrimarySearchAppBar/>
-  <div style = {{marginTop:'15px'}} >{isLoading?<LinearBuffer/>:<div><Users/><PaginationRounded page = {page}/></div>}</div>
+  <div style = {{margin:'15px 0px',minHeight:"85vh"}} >{isLoading?<LinearBuffer/>:<div><Users/></div>}</div>
+  <PaginationRounded page = {page}/>
 </div> }> </Route>
 
 <Route path = "/iVolunteer" element = { <Form/>}/>

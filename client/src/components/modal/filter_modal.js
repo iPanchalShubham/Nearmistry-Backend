@@ -13,23 +13,18 @@ const FormDialog = () => {
 const dispatch = useDispatch()
   const [open, setOpen] = useState(true);
   const handleClickOpen = () => {
-    console.log(open)
     setOpen(!open);
   };
 
   const handleClose = () => {
-    console.log(open)
     setOpen(!open);
   };
   
   const handleFilterVariables = () => {
     setOpen(!open);
     dispatch(sendFilterVariables(filterVariables))
-    console.log(open)
   };
-  useEffect(()=>{
-    dispatch(sendFilterVariables(filterVariables))
-  },[dispatch])
+
   const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistri:'Raj mistri',helper:'Helper'})
   const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistri:true,})
   

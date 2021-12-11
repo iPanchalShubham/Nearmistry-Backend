@@ -7,15 +7,18 @@ import dotenv from 'dotenv';
 
 //****FETCHING NEW ITEMS****
 export const getHomePage = async(req,res)=>{
+
     const {page} = req.query;
+    const {labour} = req.query    
+    const {painter} = req.query
+    const {helper} = req.query
+    const {raj_mistri} = req.query
+        
     try{
         const LIMIT = 9;
         const itemsToSkip = (Number(page) -1 )*LIMIT; 
-        const total = await User.countDocuments({});   
-        const items = await User.find().limit(LIMIT).skip(itemsToSkip)
-        console.log(page+ " page")
-        console.log(items.length)
-        console.log("numberOfPages "+ Math.ceil(total/LIMIT))
+        const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`]}});   
+        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`]}}).limit(LIMIT).skip(itemsToSkip)
         res.json({data:items, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
             
     }
@@ -29,6 +32,7 @@ dotenv.config({path:'../config.env'})
 export const postNewUser = async (req,res)=>{
     try{
      const {lName,fName,age,gender,phoneNumber,selectedFile,occupation} =   req.body
+     console.log(occupation)
     //  If there is any field that's not filled show this alert box.
      if(!fName|!age|!gender|!phoneNumber|!selectedFile|!occupation){
          return console.log("Please fill the required credidentials!!")
@@ -38,7 +42,6 @@ export const postNewUser = async (req,res)=>{
          return console.log("The phone number should be unique,please enter a valid phone number.")
      }
      // selected file -> 'data:mimeType;base64,ImageData'
-
     let parts = selectedFile.split(';');
     let mimeType = parts[0].split(':')[1];
     let imageData = parts[1].split(',')[1];

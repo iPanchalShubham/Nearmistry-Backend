@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function PaginationRounded({page}) {
   const { numberOfPages } = useSelector(state => state.users)
-  console.log(numberOfPages)
   return (
     <Pagination
       style={{ display: "inline-flex" }}
