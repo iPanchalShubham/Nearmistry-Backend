@@ -11,19 +11,21 @@ import {sendFilterVariables} from "../../actions/actions.js"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 const FormDialog = () => {
 const dispatch = useDispatch()
-  const [open, setOpen] = React.useState(false);
-
+  const [open, setOpen] = useState(true);
   const handleClickOpen = () => {
-    setOpen(true);
+    console.log(open)
+    setOpen(!open);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    console.log(open)
+    setOpen(!open);
   };
   
   const handleFilterVariables = () => {
+    setOpen(!open);
     dispatch(sendFilterVariables(filterVariables))
-    setOpen(false);
+    console.log(open)
   };
   useEffect(()=>{
     dispatch(sendFilterVariables(filterVariables))
@@ -53,18 +55,20 @@ const dispatch = useDispatch()
       <Button style={{ color: "white" }} size="large" onClick={handleClickOpen}>
         <FilterListIcon />
         Filter
-      </Button>
+        </Button>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
+        disablePortal = {true}
+        disableScrollLock={ true }
       >
         <DialogTitle id="form-dialog-title">Filter</DialogTitle>
         <DialogContent>
           <FormControlLabel
         control={
           <Checkbox
-          onChange = {handlePaintVars}
+          onChange = {(e) => handlePaintVars(e)}
            checked = {checkVar.painter}
            value ={!checkVar.painter?"Painter":''}          
             name="painter"
@@ -76,7 +80,7 @@ const dispatch = useDispatch()
        <FormControlLabel
       control={
         <Checkbox
-          onChange={handleLabVars}
+          onChange={(e) => handleLabVars(e)}
           checked = {checkVar.labour}
           value = {!checkVar.labour?'Labour':''}
           name="labour"
@@ -87,7 +91,7 @@ const dispatch = useDispatch()
     /> <FormControlLabel
     control={
       <Checkbox
-      onChange={handleHelpVars}
+      onChange={(e) => handleHelpVars(e)}
         checked = {checkVar.helper}
         name="helper"
         value = {!checkVar.helper?'Helper':''}
@@ -98,7 +102,7 @@ const dispatch = useDispatch()
   /><FormControlLabel
   control={
     <Checkbox
-    onChange={handleRajVars}
+    onChange={(e) => handleRajVars(e)}
       checked = {checkVar.raj_mistri}
       name="raj_mistri"
       value = {!checkVar.raj_mistri?'Raj mistri':''}
@@ -109,7 +113,7 @@ const dispatch = useDispatch()
 />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button onClick={() => setOpen(false)} color="primary">
             Cancel
           </Button>
           <Button onClick = {handleFilterVariables}  color="primary">

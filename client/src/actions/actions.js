@@ -2,11 +2,13 @@ import * as api from '../api/index';
 //Thunks --> redux-thunk is used when when the webApp is fetching the data from a remote server.It can be tricky to handle this async
 // data alone by react that is why we use redux thunk.
 
-export const getUsers = () => async(dispatch)=>{//This declaration of methods called
+export const getUsers = (page) => async(dispatch)=>{//This declaration of methods called
     //  as thunks, each thunk is a function, which return another function  
    try{
-       const {data} = await api.fetchUsers();
-        dispatch({type:'FETCH_ALL',payload:data})
+    dispatch({type:'START_LOADING'})
+       const {data: { data, currentPage, numberOfPages }} = await api.fetchUsers(page);
+        dispatch({type:'FETCH_ALL',payload: { data, currentPage, numberOfPages }})
+        dispatch({type:'END_LOADING'})
    }catch(error){
        console.log(error.message);
    }
@@ -14,8 +16,7 @@ export const getUsers = () => async(dispatch)=>{//This declaration of methods ca
 export const postUser = (post) => async(dispatch)=>{
     try{
         const {data} = await api.createUser(post)
-        console.log(data)
-        dispatch({type:'CREATE_USER',payload:data})
+        dispatch({type:'CREATE_USER',payload: data})
     }catch(e){
         console.log(e.message)
     }

@@ -65,10 +65,8 @@ const User = ({ User_details }) => {
             Gender: {User_details.gender}
           </Typography>
             <Button style={{padding:0,margin:0}} >
-          <FullInfoModel style={{padding:0}} color = 'primary'/>
+          <FullInfoModel style={{padding:0}} posts = {User_details} color = 'primary'/>
             </Button>
-            
-
             <Button  variant="outlined" size="small" color="primary" className={classes.callNow}>
               <PhoneIcon fontSize="small" color="primary" /><a style = {{textDecoration:'none'}} href= {`tel:${User_details.phoneNumber}`}> Call Now</a>
             </Button>

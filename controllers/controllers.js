@@ -6,14 +6,21 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 //****FETCHING NEW ITEMS****
-export const getHomePage = async(_,res)=>{
+export const getHomePage = async(req,res)=>{
+    const {page} = req.query;
     try{
-            const Users = await User.find()
-            console.log("In controller.js users fetched.")
-             res.json(Users)
+        const LIMIT = 9;
+        const itemsToSkip = (Number(page) -1 )*LIMIT; 
+        const total = await User.countDocuments({});   
+        const items = await User.find().limit(LIMIT).skip(itemsToSkip)
+        console.log(page+ " page")
+        console.log(items.length)
+        console.log("numberOfPages "+ Math.ceil(total/LIMIT))
+        res.json({data:items, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+            
     }
         catch(e){
-            console.log(e)
+            console.log(e.message)
         }
 }
 
@@ -26,7 +33,7 @@ export const postNewUser = async (req,res)=>{
      if(!fName|!age|!gender|!phoneNumber|!selectedFile|!occupation){
          return console.log("Please fill the required credidentials!!")
      }
-    const phoneNum = User.findOne({phoneNumber:phoneNumber})
+    const phoneNum = await User.findOne({phoneNumber:phoneNumber})
      if(phoneNum){
          return console.log("The phone number should be unique,please enter a valid phone number.")
      }

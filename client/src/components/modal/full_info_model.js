@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { Typography } from "@mui/material";
 
-const fullInfoModel = () => {
+const fullInfoModel = ({posts}) => {
     const [open, setOpen] = React.useState(false);
     
     const handleClickOpen = () => {
@@ -18,8 +18,8 @@ const fullInfoModel = () => {
     const handleClose = () => {
         setOpen(false);
     };
-    const User_details =  useSelector(state => state.users)
-  
+    
+ 
   return (
     <div>
         <Button onClick={handleClickOpen}>
@@ -33,20 +33,20 @@ const fullInfoModel = () => {
         <DialogTitle id="form-dialog-title">Full-information</DialogTitle>
         <DialogContent>
         <Typography component="h5" variant="h5">
-            {/* {`${User_details.fName?.charAt(0).toUpperCase()+User_details.fName.slice(1)} ${lastName[0]?lastName[0]?.toUpperCase():''}`} */}
+            {`${posts?.fName.charAt(0).toUpperCase()+ posts?.fName?.slice(1)} ${posts?.lName?posts?.lName.charAt(0).toUpperCase() + posts?.lName?.slice(1):''}`}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             Occupation: 
-            {/* {`${User_details.occupation?.charAt(0).toUpperCase()+User_details.occupation?.slice(1)}`} */}
+            {`${posts?.occupation?.charAt(0).toUpperCase()+ posts?.occupation?.slice(1)}`} 
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             Age: 
-            {/* {User_details.age} */}
+             {posts?.age}
           </Typography>
 
           <Typography variant="subtitle1" color="textSecondary">
             Gender:
-             {/* {User_details.gender} */}
+              {posts?.gender}
           </Typography>
         </DialogContent>
         <DialogActions>
