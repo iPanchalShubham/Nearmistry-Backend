@@ -7,7 +7,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu'
 import menuImg from '../../img/cfa38f2be19db0aa0743b24e361018c6.jpg'
-import { CssBaseline } from '@material-ui/core';
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false
