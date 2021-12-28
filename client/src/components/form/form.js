@@ -143,7 +143,7 @@ const Form = () => {
                   <MenuItem value="Labour">Labour</MenuItem>
                   <MenuItem value="Painter">Painter</MenuItem>
                   <MenuItem value="Helper">Helper</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
+                  <MenuItem value="Welder">Welder</MenuItem>
                 </Select>
               </FormControl>
               
@@ -215,7 +215,7 @@ const Form = () => {
              <em>NOTE:- This is a volunteer page, for any kinds of illegal, abusive and offensive activities the doer would be punished!</em>
             </Grid>
           </Grid>
-          <Typography variant = "h5" color="textSecondary">
+          <Typography variant = "h5" color="textPrimary">
             Thank you. ❤️
           </Typography>
           

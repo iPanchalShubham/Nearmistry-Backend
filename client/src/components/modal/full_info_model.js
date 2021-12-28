@@ -4,7 +4,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { useSelector } from "react-redux";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import { Typography } from "@mui/material";
 
@@ -32,6 +31,12 @@ const fullInfoModel = ({posts}) => {
       >
         <DialogTitle id="form-dialog-title">Full-information</DialogTitle>
         <DialogContent>
+        <img
+      style={{ maxWidth: "100%", maxHeight: "100%" }}
+      src={posts?.selectedFile}
+      alt="image"
+    />
+    <div>
         <Typography component="h5" variant="h5">
             {`${posts?.fName.charAt(0).toUpperCase()+ posts?.fName?.slice(1)} ${posts?.lName?posts?.lName.charAt(0).toUpperCase() + posts?.lName?.slice(1):''}`}
           </Typography>
@@ -48,6 +53,7 @@ const fullInfoModel = ({posts}) => {
             Gender:
               {posts?.gender}
           </Typography>
+    </div>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

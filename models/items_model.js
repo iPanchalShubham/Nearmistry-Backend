@@ -21,6 +21,9 @@ const schema = mongoose.Schema({
     },
     resizedBase64:{
         type:String
+    },
+    selectedFile:{
+        type:String
     }
 })
 

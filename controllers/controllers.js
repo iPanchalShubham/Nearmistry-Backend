@@ -13,12 +13,12 @@ export const getHomePage = async(req,res)=>{
     const {painter} = req.query
     const {helper} = req.query
     const {raj_mistri} = req.query
-        
+    const {welder} = req.query
     try{
         const LIMIT = 9;
         const itemsToSkip = (Number(page) -1 )*LIMIT; 
-        const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`]}});   
-        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`]}}).limit(LIMIT).skip(itemsToSkip)
+        const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`]}});   
+        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`]}}).limit(LIMIT).skip(itemsToSkip)
         res.json({data:items, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
             
     }
@@ -38,26 +38,28 @@ export const postNewUser = async (req,res)=>{
          return console.log("Please fill the required credidentials!!")
      }
     const phoneNum = await User.findOne({phoneNumber:phoneNumber})
+    
      if(phoneNum){
          return console.log("The phone number should be unique,please enter a valid phone number.")
      }
      // selected file -> 'data:mimeType;base64,ImageData'
-    let parts = selectedFile.split(';');
-    let mimeType = parts[0].split(':')[1];
-    let imageData = parts[1].split(',')[1];
-
-    var img = new Buffer.from(imageData, 'base64') ;//Making a buffer object
-    // If you want to know more about buffers --> https://nodejs.org/en/knowledge/advanced/buffers/how-to-use-buffers/
-    //Resizing our image with sharp.
-        await sharp(img)
-        .rotate()
+     let parts = selectedFile.split(';');
+     let mimeType = parts[0].split(':')[1];
+     let imageData = parts[1].split(',')[1];
+     
+     var img = new Buffer.from(imageData, 'base64') ;//Making a buffer object
+     // If you want to know more about buffers --> https://nodejs.org/en/knowledge/advanced/buffers/how-to-use-buffers/
+     //Resizing our image with sharp.
+     await sharp(img)
+     .rotate()
         .resize(1300,1500)
         .toBuffer()
         .then(async(resizedImageBuffer) => {
             let resizedImageData = resizedImageBuffer.toString('base64');
             let resizedBase64 = `data:${mimeType};base64,${resizedImageData}`;
             //Save new user in our database
-            const newUser = new User({fName,lName,age,gender,phoneNumber,resizedBase64,occupation})
+            console.log("Selected file " + selectedFile)
+            const newUser = new User({fName,lName,age,gender,phoneNumber,resizedBase64,occupation,selectedFile})
             await newUser.save()
             
         })

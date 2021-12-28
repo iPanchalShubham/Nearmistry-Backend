@@ -25,8 +25,8 @@ const dispatch = useDispatch()
     dispatch(sendFilterVariables(filterVariables))
   };
 
-  const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistri:'Raj mistri',helper:'Helper'})
-  const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistri:true,})
+  const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistri:'Raj mistri',helper:'Helper',welder:"Welder"})
+  const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistri:true,welder:true})
   
   const handlePaintVars = (e)=>{
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
@@ -44,7 +44,11 @@ const dispatch = useDispatch()
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
     setCheckVar({...checkVar,[e.target.name]:!checkVar.raj_mistri})
   }
-  
+  const handleWeldVars = (e)=>{
+    setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
+    setCheckVar({...checkVar,[e.target.name]:!checkVar.welder})
+  }
+  console.log(filterVariables,checkVar)
   return (
     <div>
       <Button style={{ color: "white" }} size="large" onClick={handleClickOpen}>
@@ -105,6 +109,18 @@ const dispatch = useDispatch()
     />
   }
   label="Raj mistri"
+/>
+<FormControlLabel
+  control={
+    <Checkbox
+    onChange={(e) => handleWeldVars(e)}
+      checked = {checkVar.welder}
+      name="welder"
+      value = {!checkVar.welder?'Welder':''}
+      color="primary"
+    />
+  }
+  label="Welder"
 />
         </DialogContent>
         <DialogActions>
