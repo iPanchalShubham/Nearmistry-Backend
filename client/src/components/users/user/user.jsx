@@ -26,7 +26,7 @@ const useStyles = makeStyles((Theme) =>
     },
     cover: {
       borderRadius: 5,
-      width: 155,
+      width: 155
     },
     knowMore: {
       fontSize: 11,
@@ -40,7 +40,6 @@ const useStyles = makeStyles((Theme) =>
 
 const User = ({ User_details }) => {
   const classes = useStyles();
- const lastName  = User_details?.lName.split('')
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -52,7 +51,7 @@ const User = ({ User_details }) => {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            {`${User_details.fName.charAt(0).toUpperCase()+User_details.fName.slice(1)} ${lastName[0]?lastName[0]?.toUpperCase():''}`}
+            {`${User_details.fName.charAt(0).toUpperCase()+User_details.fName.slice(1)} ${User_details.lName?User_details.lName[0].charAt(0).toUpperCase():''}`}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             Occupation: {`${User_details.occupation.charAt(0).toUpperCase()+User_details.occupation.slice(1)}`}

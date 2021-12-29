@@ -9,6 +9,7 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import { useDispatch } from "react-redux";
 import {sendFilterVariables} from "../../actions/actions.js"
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Form from "../form/form.js";
 const FormDialog = () => {
 const dispatch = useDispatch()
   const [open, setOpen] = useState(true);
@@ -25,8 +26,8 @@ const dispatch = useDispatch()
     dispatch(sendFilterVariables(filterVariables))
   };
 
-  const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistri:'Raj mistri',helper:'Helper',welder:"Welder"})
-  const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistri:true,welder:true})
+  const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistri:'Raj mistri',helper:'Helper',welder:"Welder",tileGraniteWorkers:"Tile Granite worker"})
+  const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistri:true,welder:true,tileGraniteWorkers:true})
   
   const handlePaintVars = (e)=>{
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
@@ -47,6 +48,10 @@ const dispatch = useDispatch()
   const handleWeldVars = (e)=>{
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
     setCheckVar({...checkVar,[e.target.name]:!checkVar.welder})
+  }
+  const handleTileGraniteWorkersVars = (e)=>{
+    setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
+    setCheckVar({...checkVar,[e.target.name]:!checkVar.tileGraniteWorkers})
   }
   console.log(filterVariables,checkVar)
   return (
@@ -121,6 +126,18 @@ const dispatch = useDispatch()
     />
   }
   label="Welder"
+/>
+<FormControlLabel
+control={
+  <Checkbox
+  onChange = {(e)=>handleTileGraniteWorkersVars(e)}
+  checked = {checkVar.tileGraniteWorkers}
+  name="tile_granite"
+  value={!checkVar.tileGraniteWorkers?'Tile Granite worker':''}
+  color="primary"
+  />
+}
+label = "Tile Granite workers"
 />
         </DialogContent>
         <DialogActions>

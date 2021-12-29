@@ -144,6 +144,7 @@ const Form = () => {
                   <MenuItem value="Painter">Painter</MenuItem>
                   <MenuItem value="Helper">Helper</MenuItem>
                   <MenuItem value="Welder">Welder</MenuItem>
+                  <MenuItem value="Tile Granite worker">Tile Granite worker</MenuItem>
                 </Select>
               </FormControl>
               

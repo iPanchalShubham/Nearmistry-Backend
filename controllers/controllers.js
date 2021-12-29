@@ -14,11 +14,12 @@ export const getHomePage = async(req,res)=>{
     const {helper} = req.query
     const {raj_mistri} = req.query
     const {welder} = req.query
+    const {tileGraniteWorkers} = req.query
     try{
         const LIMIT = 9;
         const itemsToSkip = (Number(page) -1 )*LIMIT; 
-        const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`]}});   
-        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`]}}).limit(LIMIT).skip(itemsToSkip)
+        const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers}`]}});   
+        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers}`]}}).limit(LIMIT).skip(itemsToSkip)
         res.json({data:items, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
             
     }
@@ -32,7 +33,6 @@ dotenv.config({path:'../config.env'})
 export const postNewUser = async (req,res)=>{
     try{
      const {lName,fName,age,gender,phoneNumber,selectedFile,occupation} =   req.body
-     console.log(occupation)
     //  If there is any field that's not filled show this alert box.
      if(!fName|!age|!gender|!phoneNumber|!selectedFile|!occupation){
          return console.log("Please fill the required credidentials!!")
@@ -58,7 +58,6 @@ export const postNewUser = async (req,res)=>{
             let resizedImageData = resizedImageBuffer.toString('base64');
             let resizedBase64 = `data:${mimeType};base64,${resizedImageData}`;
             //Save new user in our database
-            console.log("Selected file " + selectedFile)
             const newUser = new User({fName,lName,age,gender,phoneNumber,resizedBase64,occupation,selectedFile})
             await newUser.save()
             
