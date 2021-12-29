@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:5000/'
+const url = 'https://labrecruit.herokuapp.com/'
 //https is very important, because if you make request to change something through a http protocol (unsecure network) then your request 
 // could be blocked.
 //Reponse data coming from getHomePage Funtion from our server side.
