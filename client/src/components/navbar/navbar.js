@@ -133,7 +133,7 @@ const  PrimarySearchAppBar = ()=> {
             <MenuIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
-            DevDoesHelp.Org
+            DIALBASE.COM
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
