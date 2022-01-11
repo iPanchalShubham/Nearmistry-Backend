@@ -15,6 +15,7 @@ function PaginationRounded({page}) {
       count={numberOfPages}
       page={Number(page) || 1}
       shape="rounded"
+      onClick={(e) => console.log(e.target.innerText)}
       renderItem={(item) => (
         <PaginationItem {...item} component={Link} to={`/items?page=${item.page}&helper=${filterVars.helper}&raj_mistri=${filterVars.raj_mistri}&labour=${filterVars.labour}&painter=${filterVars.painter}&welder=${filterVars.welder}&tileGraniteWorkers=${filterVars.tileGraniteWorkers}`} />
       )}

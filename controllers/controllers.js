@@ -20,9 +20,10 @@ export const getHomePage = async(req,res)=>{
         const LIMIT = 9;
         const itemsToSkip = (Number(page) -1 )*LIMIT; 
         const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers},`,`${occupation}`]}});   
-        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers}`,`${occupation}`]}}).limit(LIMIT).skip(itemsToSkip)
-        res.json({data:items, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
-            
+        const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers}`,`${occupation}`]}})
+        // .limit(LIMIT).skip(itemsToSkip)
+        res.json({data:items});
+        // , currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)
     }
         catch(e){
             console.log(e.message)
