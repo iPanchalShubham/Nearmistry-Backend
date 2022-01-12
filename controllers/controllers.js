@@ -38,7 +38,7 @@ export const getHomePage = async(req,res)=>{
 
 // ********\/\/\/\/\/\/\/*********GETTING -----> [occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)]
 
-export const getAllInfo = async (req,res)=>{
+export const getInfo = async (_,res)=>{
     try {
         const LIMIT = 9
         const totalLabour = await User.countDocuments({occupation:{$in:['Labour']}})
