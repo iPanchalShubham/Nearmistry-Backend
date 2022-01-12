@@ -38,12 +38,11 @@ export const getHomePage = async(req,res)=>{
 
 // ********\/\/\/\/\/\/\/*********GETTING -----> [occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)]
 
-export const getInfo = async (req,res)=>{
-    const {occupation} = req.query
+export const getAllInfo = async (req,res)=>{
     try {
         const LIMIT = 9
-        const total = await User.countDocuments({occupation:{$in:[`${occupation}`]}})
-        res.json({occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)}
+        const totalLabour = await User.countDocuments({occupation:{$in:['Labour']}})
+        res.json({occupation:"Labour",numberOfPages:Math.ceil(totalLabour/LIMIT)}
         )
     } catch (e) {
         console.log(e.message)
