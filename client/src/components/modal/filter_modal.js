@@ -26,8 +26,8 @@ const dispatch = useDispatch()
     dispatch(sendFilterVariables(filterVariables))
   };
 
-  const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistri:'Raj mistri',helper:'Helper',welder:"Welder",tileGraniteWorkers:"Tile Granite worker"})
-  const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistri:true,welder:true,tileGraniteWorkers:true})
+  const [filterVariables,setFilterVariables] = useState({painter:'Painter',labour:'Labour',raj_mistry:'Raj Mistry',helper:'Helper',welder:"Welder",tileGraniteWorkers:"Tile Granite worker"})
+  const [checkVar,setCheckVar] = useState({painter:true,helper:true,labour:true,raj_mistry:true,welder:true,tileGraniteWorkers:true})
   
   const handlePaintVars = (e)=>{
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
@@ -43,7 +43,7 @@ const dispatch = useDispatch()
   }
   const handleRajVars = (e)=>{
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
-    setCheckVar({...checkVar,[e.target.name]:!checkVar.raj_mistri})
+    setCheckVar({...checkVar,[e.target.name]:!checkVar.raj_mistry})
   }
   const handleWeldVars = (e)=>{
     setFilterVariables({...filterVariables,[e.target.name]:e.target.value})
@@ -107,13 +107,13 @@ const dispatch = useDispatch()
   control={
     <Checkbox
     onChange={(e) => handleRajVars(e)}
-      checked = {checkVar.raj_mistri}
-      name="raj_mistri"
-      value = {!checkVar.raj_mistri?'Raj mistri':''}
+      checked = {checkVar.raj_mistry}
+      name="raj_mistry"
+      value = {!checkVar.raj_mistri?'Raj Mistry':''}
       color="primary"
     />
   }
-  label="Raj mistri"
+  label="Raj Mistry"
 />
 <FormControlLabel
   control={
