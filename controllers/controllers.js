@@ -45,9 +45,9 @@ export const getInfo = async (_,res)=>{
         const totalLabour = await User.countDocuments({occupation:{$in:['Labour']}})
         const totalTileGraniteWorker = await User.countDocuments({occupation:{$in:["Tile Granite worker"]}})
         const totalRaj_mistry = await User.countDocuments({occupation:{$in:['Raj Mistry']}})
-        res.json({occupation:"Labour",numberOfPages:Math.ceil(totalLabour/LIMIT)},
-        {occupation:"Raj Mistry",numberOfPages:Math.ceil(totalRaj_mistry/LIMIT)},
-        {occupation:"Tile Granite worker",numberOfPages:Math.ceil(totalTileGraniteWorker/LIMIT)}
+        res.json({occupation:"Labour",numberOfPages:Math.ceil(totalLabour/LIMIT),
+        occupation:"Raj Mistry",numberOfPages:Math.ceil(totalRaj_mistry/LIMIT),
+        occupation:"Tile Granite worker",numberOfPages:Math.ceil(totalTileGraniteWorker/LIMIT)}
         )
     } catch (e) {
         console.log(e.message)
