@@ -20,7 +20,7 @@ app.use(express.urlencoded({ limit: "5mb", extended: true, parameterLimit: 50000
 app.use(cors())
 
 // Connection to DB
-const db  = 'mongodb+srv://Shubham:Shubham@cluster0.zrjwh.mongodb.net/user_data?retryWrites=true&w=majority'
+const db  = 'Your DB string'
 mongoose.connect(process.env.MONGODB_URI||db,{
     useCreateIndex:true,
     useFindAndModify:false,
@@ -36,5 +36,3 @@ if(process.env.NODE_ENV == "production"){
 }
 
 app.listen(process.env.PORT||5000,()=>console.log(`Application Running on port ${process.env.PORT}`))
-// heroku origin 
-// heroku  https://git.heroku.com/labrecruit.git (fetch)
