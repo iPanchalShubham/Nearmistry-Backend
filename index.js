@@ -3,10 +3,6 @@ import routes from './appRoute/routes.js'
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-
 
 const app  = express();
 //DOTENV
@@ -20,7 +16,7 @@ app.use(express.urlencoded({ limit: "5mb", extended: true, parameterLimit: 50000
 app.use(cors())
 
 // Connection to DB
-const db  = 'Your DB string'
+const db  = 'mongodb+srv://Shubham:Shubham@cluster0.zrjwh.mongodb.net/user_data?retryWrites=true&w=majority'
 mongoose.connect(process.env.MONGODB_URI||db,{
     useCreateIndex:true,
     useFindAndModify:false,
@@ -29,10 +25,9 @@ mongoose.connect(process.env.MONGODB_URI||db,{
 }).then(()=>{
     console.log('Wait....\n Handshake confirmed.')
 }).catch(e =>console.log(e))
-
 app.use('/volunteerSection',routes)
 if(process.env.NODE_ENV == "production"){
     app.use('/volunteerSection',routes)
 }
 
-app.listen(process.env.PORT||5000,()=>console.log(`Application Running on port ${process.env.PORT}`))
+app.listen(process.env.PORT||5000,()=>console.log(`Application Running on port ${process.env.PORT||5000}`))
