@@ -153,8 +153,7 @@ export const postNewUser = async (req, res) => {
 
     await newUser.save();
     return res.status(201).json({
-      success: true,
-      data: newUser,
+      message:"User registration succsessful"
     });
 
     //     }
