@@ -126,9 +126,7 @@ export const postNewUser = async (req, res) => {
       location,
     } = req.body;
     //  If there is any field that's not filled show this alert box.
-     if(!lName|!age|!gender|!phoneNumber|!imgUrl|!occupation|!areaName|!location){
-         return res.status(400).json({message:"Please fill the required credentials!!"})
-     }
+
     const phoneNum = await User.findOne({ phoneNumber: phoneNumber });
 
     if (phoneNum) {
