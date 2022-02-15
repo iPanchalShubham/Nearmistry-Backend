@@ -22,6 +22,9 @@ const schema = mongoose.Schema({
   imgUrl:{
     type:String
   },
+  areaName:{
+    type:String
+  },
   location: {
     type: {
       type: String,
