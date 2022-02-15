@@ -115,24 +115,24 @@ dotenv.config({ path: "../config.env" });
 export const postNewUser = async (req, res) => {
   try {
     const {
-      lName,
       fName,
+      lName,
       age,
       gender,
       phoneNumber,
       imgUrl,
       occupation,
+      areaName,
       location,
-      coordinates,
     } = req.body;
     //  If there is any field that's not filled show this alert box.
      if(!fName|!age|!gender|!phoneNumber|!imgUrl|!occupation){
-         return res.status(400).json({message:"Please fill the required credidentials!!"})
+         return res.status(400).json({message:"Please fill the required credentials!!"})
      }
     const phoneNum = await User.findOne({ phoneNumber: phoneNumber });
 
     if (phoneNum) {
-     return res.status(400).json({message:"Please fill the required credidentials!!"})
+     return res.status(400).json({message:"credentials already exists!!"})
     }
 
 /*NOW WE'LL USE CLOUDINARY OR PLATFORMS LIKE S3 FOR IMAGE STORAGE AND WILL NOT USE BASE64 FOR ENCODING OF OUR IMAGE TO SAVE INTO OUR DATABASE */ 
@@ -143,10 +143,10 @@ export const postNewUser = async (req, res) => {
       age,
       gender,
       phoneNumber,
-      occupation,
       imgUrl,
+      occupation,
+      areaName,
       location,
-      coordinates,
     });
 
     await newUser.save();
