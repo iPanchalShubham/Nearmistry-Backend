@@ -120,21 +120,19 @@ export const postNewUser = async (req, res) => {
       age,
       gender,
       phoneNumber,
-      selectedFile,
+      imgUrl,
       occupation,
       location,
       coordinates,
     } = req.body;
     //  If there is any field that's not filled show this alert box.
-     if(!fName|!age|!gender|!phoneNumber|!selectedFile|!occupation){
-         return console.log("Please fill the required credidentials!!")
+     if(!fName|!age|!gender|!phoneNumber|!imgUrl|!occupation){
+         return res.status(400).json({message:"Please fill the required credidentials!!"})
      }
     const phoneNum = await User.findOne({ phoneNumber: phoneNumber });
 
     if (phoneNum) {
-      return console.log(
-        "The phone number should be unique,please enter a valid phone number."
-      );
+     return res.status(400).json({message:"Please fill the required credidentials!!"})
     }
 
 /*NOW WE'LL USE CLOUDINARY OR PLATFORMS LIKE S3 FOR IMAGE STORAGE AND WILL NOT USE BASE64 FOR ENCODING OF OUR IMAGE TO SAVE INTO OUR DATABASE */ 
@@ -146,7 +144,7 @@ export const postNewUser = async (req, res) => {
       gender,
       phoneNumber,
       occupation,
-      selectedFile,
+      imgUrl,
       location,
       coordinates,
     });

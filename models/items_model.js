@@ -19,11 +19,8 @@ const schema = mongoose.Schema({
   occupation: {
     type: String,
   },
-  resizedBase64: {
-    type: String,
-  },
-  selectedFile: {
-    type: String,
+  imgUrl:{
+    type:String
   },
   location: {
     type: {
