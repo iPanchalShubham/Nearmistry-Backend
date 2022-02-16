@@ -20,7 +20,7 @@ app.use(cors());
 const db =
   "Your db string";
 mongoose
-  .connect(process.env.MONGODB_URI || db, {
+  .connect(process.env.MONGODB_URI , {
     useCreateIndex: true,
     useFindAndModify: true,
     useNewUrlParser: true,
