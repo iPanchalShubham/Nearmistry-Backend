@@ -18,7 +18,7 @@ app.use(cors());
 
 // Connection to DB
 const db =
-  "mongodb+srv://Shubham:Shubham@cluster0.zrjwh.mongodb.net/user_data?retryWrites=true&w=majority";
+  "Your db string";
 mongoose
   .connect(process.env.MONGODB_URI || db, {
     useCreateIndex: true,
