@@ -40,26 +40,41 @@ export const getHomePage = async (req, res) => {
             ],
           },
         },
-        {
-          location: {
-            $geoWithin: {
-              $centerSphere: [[`${lat}`, `${lng}`], 4.3496],
-              //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
-            },
-          },
-        },
+        // {
+        //   location: {
+        //     $geoWithin: {
+        //       $centerSphere: [[`${lat}`, `${lng}`], 4.3496],
+        //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
+        //     },
+        //   },
+        // },
       ],
     });
     const items = await User.find({
       occupation: {
-        $in: [
-          `${labour}`,
-          `${painter}`,
-          `${helper}`,
-          `${raj_mistri}`,
-          `${welder}`,
-          `${tileGraniteWorkers}`,
-          `${occupation}`,
+        $and: [
+          {
+            occupation: {
+              $in: [
+                `${labour}`,
+                `${painter}`,
+                `${helper}`,
+                `${raj_mistri}`,
+                `${welder}`,
+                `${tileGraniteWorkers},`,
+                `${occupation}`,
+              ],
+            },
+          },
+          // {
+          //   location: {
+          //     $geoWithin: {
+          //       /*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE :)*/
+          //       $centerSphere: [[`${lng}`, `${lat}`], 4.3496],
+          //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
+          //     },
+          //   },
+          // },
         ],
       },
     })
@@ -81,7 +96,6 @@ export const getHomePage = async (req, res) => {
 
 export const getInfo = async (_, res) => {
   try {
-    
     const LIMIT = 9;
     const totalLabour = await User.countDocuments({
       occupation: { $in: ["Labour"] },
@@ -107,7 +121,7 @@ export const getInfo = async (_, res) => {
     const totalCarpenter = await User.countDocuments({
       occupation: { $in: ["Carpenter"] },
     });
-     const totalPainter = await User.countDocuments({
+    const totalPainter = await User.countDocuments({
       occupation: { $in: ["Painter"] },
     });
     res.json([
