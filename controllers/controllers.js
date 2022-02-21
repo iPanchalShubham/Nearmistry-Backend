@@ -22,24 +22,26 @@ export const getHomePage = async (req, res) => {
   try {
     const LIMIT = 9;
     const itemsToSkip = (Number(page) - 1) * LIMIT;
+    // ###################################################################GEOJSO ##################################################
+
     /*
         $near "sorts" the results to return, and that is always going to take more time than not sorting. So it depends on what you want. If "order" of "nearest" is important, then you use $near. If it is not, then use $geoWithin and a plain definition of a circle. Which is the only polygon the two share in common.
         */
-    const total = await User.countDocuments({
-      $and: [
-        {
-          occupation: {
-            $in: [
-              `${labour}`,
-              `${painter}`,
-              `${helper}`,
-              `${raj_mistri}`,
-              `${welder}`,
-              `${tileGraniteWorkers},`,
-              `${occupation}`,
-            ],
-          },
-        },
+    // const total = await User.countDocuments({
+    //   $and: [
+    //     {
+    //       occupation: {
+    //         $in: [
+    //           `${labour}`,
+    //           `${painter}`,
+    //           `${helper}`,
+    //           `${raj_mistri}`,
+    //           `${welder}`,
+    //           `${tileGraniteWorkers},`,
+    //           `${occupation}`,
+    //         ],
+    //       },
+    //     },
         // {
         //   location: {
         //     $geoWithin: {
@@ -48,24 +50,28 @@ export const getHomePage = async (req, res) => {
         //     },
         //   },
         // },
-      ],
-    });
-    const items = await User.find({
-      occupation: {
-        $and: [
-          {
-            occupation: {
-              $in: [
-                `${labour}`,
-                `${painter}`,
-                `${helper}`,
-                `${raj_mistri}`,
-                `${welder}`,
-                `${tileGraniteWorkers},`,
-                `${occupation}`,
-              ],
-            },
-          },
+    //   ],
+    // });
+    // ###################################################################GEOJSON ^^^^^^^^^^^^^^^^
+    
+    // ###################################################################GEOJSON #########################################
+        
+    // const items = await User.find({
+    //   occupation: {
+    //     $and: [
+    //       {
+    //         occupation: {
+    //           $in: [
+    //             `${labour}`,
+    //             `${painter}`,
+    //             `${helper}`,
+    //             `${raj_mistri}`,
+    //             `${welder}`,
+    //             `${tileGraniteWorkers},`,
+    //             `${occupation}`,
+    //           ],
+    //         },
+    //       },
           // {
           //   location: {
           //     $geoWithin: {
@@ -75,9 +81,12 @@ export const getHomePage = async (req, res) => {
           //     },
           //   },
           // },
-        ],
-      },
-    })
+    //     ],
+    //   },
+    // })
+    // ###################################################################GEOJSON #########################################
+    const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers},`,`${occupation}`]}});   
+    const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers}`,`${occupation}`]}})
       .limit(LIMIT)
       .skip(itemsToSkip);
     res.json({
