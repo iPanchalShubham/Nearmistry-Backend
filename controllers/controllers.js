@@ -199,7 +199,12 @@ export const postNewUser = async (req, res) => {
     if (phoneNum) {
       return res.status(400).json({ message: "credentials already exists!!" });
     }
-
+    // if(!imgUrl){
+    //   return res.status(401).json({message:"Please try upload your image"})
+    // }
+    // if(!areaName){
+    //   return res.status(401).json({message:"Fill address again"})
+    // }
     /*NOW WE'LL USE CLOUDINARY OR PLATFORMS LIKE S3 FOR IMAGE STORAGE AND WILL NOT USE BASE64 FOR ENCODING OF OUR IMAGE TO SAVE INTO OUR DATABASE */
     //         //Save new user in our database
     const newUser = new User({
@@ -216,7 +221,7 @@ export const postNewUser = async (req, res) => {
 
     await newUser.save();
     return res.status(201).json({
-      message: "User registration succsessful",
+      message: "Registration succsessful",
     });
 
     //     }
