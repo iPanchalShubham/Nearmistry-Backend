@@ -14,14 +14,10 @@ app.use(
 );
 
 //Middleware Routes
-app.use((req, res, next) => {
-  const allowedOrigins = ['nearmistry.com', 'www.nearmistry.com', 'https://nearmistry.com','http://localhost:3000/'];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  }
-  return next();
-});
+app.use(cors({
+  origin:"https://nearmistry.com"
+}));
+
 // Connection to DB
 // const db ; //Put your db string here
 
