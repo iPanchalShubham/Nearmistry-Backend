@@ -7,16 +7,14 @@ const app = express();
 //DOTENV
 dotenv.config({ path: "./config.env" });
 
-//JSON parser
-app.use(express.json({ limit: "5mb" }));
-app.use(
-  express.urlencoded({ limit: "5mb", extended: true, parameterLimit: 50000 })
-);
 
 //Middleware Routes
 app.use(cors({
   origin:["https://nearmistry.com","http://localhost:3000"]
 }));
+
+//JSON parser
+app.use(express.json({ limit: "5mb" }));
 
 // Connection to DB
 // const db ; //Put your db string here
