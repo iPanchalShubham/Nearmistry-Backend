@@ -15,7 +15,7 @@ app.use(
 
 //Middleware Routes
 app.use(cors({
-  origin:"https://nearmistry.com"
+  origin:["https://nearmistry.com","http://localhost:3000"]
 }));
 
 // Connection to DB
