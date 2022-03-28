@@ -5,7 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 const app = express();
 //DOTENV
-dotenv.config({ path: "./config.env" });
+dotenv.config({ path: "./.env" });
 
 
 //Middleware Routes
@@ -18,7 +18,6 @@ app.use(express.json({ limit: "5mb" }));
 
 // Connection to DB
 // const db ; //Put your db string here
-
 mongoose
   .connect(process.env.MONGODB_URI , {
     useCreateIndex: true,

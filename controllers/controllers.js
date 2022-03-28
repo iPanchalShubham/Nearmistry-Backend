@@ -1,6 +1,5 @@
 import { User } from "../models/items_model.js";
 import bcrypt from "bcryptjs";
-import { Volunteers } from "../models/volunteers_model.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
@@ -42,20 +41,20 @@ export const getHomePage = async (req, res) => {
     //         ],
     //       },
     //     },
-        // {
-        //   location: {
-        //     $geoWithin: {
-        //       $centerSphere: [[`${lat}`, `${lng}`], 4.3496],
-        //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
-        //     },
-        //   },
-        // },
+    // {
+    //   location: {
+    //     $geoWithin: {
+    //       $centerSphere: [[`${lat}`, `${lng}`], 4.3496],
+    //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
+    //     },
+    //   },
+    // },
     //   ],
     // });
     // ###################################################################GEOJSON ^^^^^^^^^^^^^^^^
-    
+
     // ###################################################################GEOJSON #########################################
-        
+
     // const items = await User.find({
     //   occupation: {
     //     $and: [
@@ -72,21 +71,45 @@ export const getHomePage = async (req, res) => {
     //           ],
     //         },
     //       },
-          // {
-          //   location: {
-          //     $geoWithin: {
-          //       /*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE :)*/
-          //       $centerSphere: [[`${lng}`, `${lat}`], 4.3496],
-          //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
-          //     },
-          //   },
-          // },
+    // {
+    //   location: {
+    //     $geoWithin: {
+    //       /*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE :)*/
+    //       $centerSphere: [[`${lng}`, `${lat}`], 4.3496],
+    //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
+    //     },
+    //   },
+    // },
     //     ],
     //   },
     // })
     // ###################################################################GEOJSON #########################################
-    const total = await User.countDocuments({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers},`,`${occupation}`]}});   
-    const items = await User.find({occupation: {$in: [`${labour}`,`${painter}`,`${helper}`,`${raj_mistri}`,`${welder}`,`${tileGraniteWorkers}`,`${occupation}`]}})
+    const total = await User.countDocuments({
+      occupation: {
+        $in: [
+          `${labour}`,
+          `${painter}`,
+          `${helper}`,
+          `${raj_mistri}`,
+          `${welder}`,
+          `${tileGraniteWorkers},`,
+          `${occupation}`,
+        ],
+      },
+    });
+    const items = await User.find({
+      occupation: {
+        $in: [
+          `${labour}`,
+          `${painter}`,
+          `${helper}`,
+          `${raj_mistri}`,
+          `${welder}`,
+          `${tileGraniteWorkers}`,
+          `${occupation}`,
+        ],
+      },
+    })
       .limit(LIMIT)
       .skip(itemsToSkip);
     res.json({
@@ -175,7 +198,7 @@ export const getInfo = async (_, res) => {
 
 // ****************************###############################################*************************************########################
 // ########################################################################################################################################
-dotenv.config({ path: "../config.env" });
+dotenv.config({ path: "../.env" });
 //****POSTING NEW ITEMS****
 export const postNewUser = async (req, res) => {
   try {
@@ -197,7 +220,7 @@ export const postNewUser = async (req, res) => {
     const phoneNum = await User.findOne({ phoneNumber: phoneNumber });
 
     if (phoneNum) {
-      return res.status(400).json({ message: "credentials already exists!!" });
+      return res.status(400).json({ message: "Phone number already in use!" });
     }
     // if(!imgUrl){
     //   return res.status(401).json({message:"Please try upload your image"})
@@ -239,58 +262,95 @@ export const postNewUser = async (req, res) => {
 { */
 
 // ****************************###############################################*************************************########################
+// #############################****LIST NEW BUSINESS****###############################################################
+import { Businesses } from "../models/business_model.js";
+export const listNewBusiness = async(req, res) => {
+  try {
+    const {
+      bName,
+      bAge,
+      phoneNumber,
+      bType,
+      imgUrl,
+      ownerImg,
+      areaName,
+      location,
+    } = req.body;
+    const newBusiness = new Businesses({
+      bName,
+      bAge,
+      phoneNumber,
+      bType,
+      imgUrl,
+      ownerImg,
+      areaName,
+      location,
+    })
+    await newBusiness.save();
+     res.status(201).json({
+      message: "Registration succsessful",
+    });
+  } catch (error) {
+    console.log(error.message)
+    res
+      .status(400)
+      .json({ message: "Something bad happend, please try again." });
+  }
+};
+// #######################################*******************************VOLUNTEER'S METHOD*********************############################
+// ****************************###############################################*************************************########################
 // ########################################################################################################################################
 
 // AUTHENTICATE NEW VOLUNTEERS
-export const authenticateVolunteer = async (req, _) => {
-  try {
-    const { email, password } = req.body;
-    if (!email | !password) {
-      return console.log("please fill the required fields!");
-    }
-    const userFound = Volunteers.findOne({ email: email });
-    if (userFound) {
-      const passwordMatch = bcrypt.compare(password, userFound.password);
-      if (passwordMatch) {
-        return console.log("Volunteer identified!");
-      } else {
-        return console.log("Invalid creds!");
-      }
-    } else {
-      return console.log("Invalid creds!");
-    }
-  } catch (error) {
-    return console.log(error);
-  }
-};
+// export const authenticateVolunteer = async (req, _) => {
+//   try {
+//     const { email, password } = req.body;
+//     if (!email | !password) {
+//       return console.log("please fill the required fields!");
+//     }
+//     const userFound = Volunteers.findOne({ email: email });
+//     if (userFound) {
+//       const passwordMatch = bcrypt.compare(password, userFound.password);
+//       if (passwordMatch) {
+//         return console.log("Volunteer identified!");
+//       } else {
+//         return console.log("Invalid creds!");
+//       }
+//     } else {
+//       return console.log("Invalid creds!");
+//     }
+//   } catch (error) {
+//     return console.log(error);
+//   }
+// };
 
 // ****************************###############################################*************************************########################
 // ########################################################################################################################################
 
 // REGISTER NEW VOLUNTEERS
-export const postNewVolunteer = async (req, _) => {
-  try {
-    const { fName, lName, email, password, passwordConfirm } = req.body;
-    if (!fName | !lName | !email | !password | !passwordConfirm) {
-      return console.log("Please fill the required fields!");
-    }
+// export const postNewVolunteer = async (req, _) => {
+//   try {
+//     const { fName, lName, email, password, passwordConfirm } = req.body;
+//     if (!fName | !lName | !email | !password | !passwordConfirm) {
+//       return console.log("Please fill the required fields!");
+//     }
 
-    const emailFound = await Volunteers.findOne({ email: email });
-    const confirmationCode = jwt.sign({ email: email }, process.env.SECRET);
-    if (emailFound) {
-      return console.log("email already exists!!");
-    } else {
-      const volunteer = Volunteers({
-        fName,
-        lName,
-        email,
-        password,
-        passwordConfirm,
-        confirmationCode,
-      });
-      await volunteer.save();
-    }
-  } catch (e) {
-    console.log(e);
-  }
-};
+//     const emailFound = await Volunteers.findOne({ email: email });
+//     const confirmationCode = jwt.sign({ email: email }, process.env.SECRET);
+//     if (emailFound) {
+//       return console.log("email already exists!!");
+//     } else {
+//       const volunteer = Volunteers({
+//         fName,
+//         lName,
+//         email,
+//         password,
+//         passwordConfirm,
+//         confirmationCode,
+//       });
+//       await volunteer.save();
+//     }
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
