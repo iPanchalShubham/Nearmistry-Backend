@@ -11,7 +11,7 @@ const schema = new mongoose.Schema({
   phoneNumber: {
     type: String,
   },
-  btype: {
+  occupation: {
     type: String,
   },
   imgUrl: {

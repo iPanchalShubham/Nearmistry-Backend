@@ -156,6 +156,37 @@ export const getInfo = async (_, res) => {
     const totalPainter = await User.countDocuments({
       occupation: { $in: ["Painter"] },
     });
+    const totalTileGraniteShops = await Businesses.countDocuments({
+      occupation: { $in: ["Tile Granite"] },
+    });
+    const totalWoodWorks = await Businesses.countDocuments({
+      occupation: { $in: ["Wood works"] },
+    });
+    const totalLabourContractor = await Businesses.countDocuments({
+      occupation: { $in: ["Labour contractor(Thekedaar)"] },
+    }); 
+    const totalWeldingShops = await Businesses.countDocuments({
+      occupation: { $in: ["Welding"] },
+    }); 
+    const totalElectricalShops = await Businesses.countDocuments({
+      occupation: { $in: ["Electrical"] },
+    }); 
+    const totalPainterContractor = await Businesses.countDocuments({
+      occupation: { $in: ["Painter contractor(Thekedaar)"] },
+    }); 
+    const totalSanitaryShops = await Businesses.countDocuments({
+      occupation: { $in: ["Sanitary"] },
+    }); 
+    const totalPaintShops = await Businesses.countDocuments({
+      occupation: { $in: ["Paints"] },
+    }); 
+    const totalTileGraniteContractor = await Businesses.countDocuments({
+      occupation: { $in: ["Tile Granite contractor(Thekedaar)"] },
+    }); 
+    const totalBuildingMaterialShops = await Businesses.countDocuments({
+      occupation: { $in: ["Building material"] },
+    }); 
+    
     res.json([
       { occupation: "Labour", numberOfPages: Math.ceil(totalLabour / LIMIT) },
       {
@@ -189,6 +220,44 @@ export const getInfo = async (_, res) => {
       {
         occupation: "Painter",
         numberOfPages: Math.ceil(totalPainter / LIMIT),
+      },
+      // Businesses
+      {
+        occupation: "Tile Granite",
+        numberOfPages: Math.ceil(totalTileGraniteShops / LIMIT),
+      }
+      ,
+      {
+        occupation: "Wood works",
+        numberOfPages: Math.ceil(totalWoodWorks / LIMIT),
+      },
+      {
+        occupation: "Labour contractor(Thekedaar)",
+        numberOfPages: Math.ceil(totalLabourContractor / LIMIT),
+      },
+      {
+        occupation: "Welding",
+        numberOfPages: Math.ceil(totalWeldingShops / LIMIT),
+      },
+      {
+        occupation: "Electrical",
+        numberOfPages: Math.ceil(totalElectricalShops / LIMIT),
+      },
+      {
+        occupation: "Painter contractor(Thekedaar)",
+        numberOfPages: Math.ceil(totalPainterContractor / LIMIT),
+      },
+      {
+        occupation: "Sanitary",
+        numberOfPages: Math.ceil(totalSanitaryShops / LIMIT),
+      },
+      {
+        occupation: "Tile Granite contractor(Thekedaar)",
+        numberOfPages: Math.ceil(totalTileGraniteContractor / LIMIT),
+      },
+      {
+        occupation: "Building material",
+        numberOfPages: Math.ceil(totalBuildingMaterialShops / LIMIT),
       },
     ]);
   } catch (e) {
@@ -270,7 +339,7 @@ export const listNewBusiness = async(req, res) => {
       bName,
       bAge,
       phoneNumber,
-      bType,
+      occupation,
       imgUrl,
       ownerImg,
       areaName,
@@ -280,7 +349,7 @@ export const listNewBusiness = async(req, res) => {
       bName,
       bAge,
       phoneNumber,
-      bType,
+      occupation,
       imgUrl,
       ownerImg,
       areaName,
