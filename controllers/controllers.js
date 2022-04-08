@@ -1,4 +1,5 @@
 import { User } from "../models/items_model.js";
+import { Businesses } from "../models/business_model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -84,34 +85,56 @@ export const getHomePage = async (req, res) => {
     //   },
     // })
     // ###################################################################GEOJSON #########################################
-    const total = await User.countDocuments({
-      occupation: {
-        $in: [
-          `${labour}`,
-          `${painter}`,
-          `${helper}`,
-          `${raj_mistri}`,
-          `${welder}`,
-          `${tileGraniteWorkers},`,
-          `${occupation}`,
-        ],
-      },
-    });
-    const items = await User.find({
-      occupation: {
-        $in: [
-          `${labour}`,
-          `${painter}`,
-          `${helper}`,
-          `${raj_mistri}`,
-          `${welder}`,
-          `${tileGraniteWorkers}`,
-          `${occupation}`,
-        ],
-      },
-    })
-      .limit(LIMIT)
-      .skip(itemsToSkip);
+    let total;
+    let items;
+    if(occupation == 'Tile Granite'|occupation == 'Labour contractor(Thekedaar)'|occupation == 'Wood works'|occupation == 'Welding'|occupation == 'Electrical'|occupation == 'Painter contractor(Thekedaar)'|occupation == 'Sanitary'|occupation == 'Paints'|occupation == 'Tile Granite contractor(Thekedaar)'|occupation == 'Building material'){
+       total = await Businesses.countDocuments({
+        occupation: {
+          $in: [
+            `${occupation}`,
+          ],
+        },
+      });
+       items = await Businesses.find({
+        occupation: {
+          $in: [
+            `${occupation}`,
+          ],
+        },
+      })
+        .limit(LIMIT)
+        .skip(itemsToSkip);
+    }else{
+       total = await User.countDocuments({
+        occupation: {
+          $in: [
+            `${labour}`,
+            `${painter}`,
+            `${helper}`,
+            `${raj_mistri}`,
+            `${welder}`,
+            `${tileGraniteWorkers},`,
+            `${occupation}`,
+          ],
+        },
+      });
+       items = await User.find({
+        occupation: {
+          $in: [
+            `${labour}`,
+            `${painter}`,
+            `${helper}`,
+            `${raj_mistri}`,
+            `${welder}`,
+            `${tileGraniteWorkers}`,
+            `${occupation}`,
+          ],
+        },
+      })
+        .limit(LIMIT)
+        .skip(itemsToSkip);
+    }
+    
     res.json({
       data: items,
       currentPage: Number(page),
@@ -124,7 +147,7 @@ export const getHomePage = async (req, res) => {
 
 // ****************************###############################################*************************************########################
 // ########################################################################################################################################
-// ********\/\/\/\/\/\/\/*********GETTING -----> [occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)]
+// ********\/\/\/\/\/\/\/*********GETTING -----> {occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)}
 
 export const getInfo = async (_, res) => {
   try {
@@ -332,7 +355,6 @@ export const postNewUser = async (req, res) => {
 
 // ****************************###############################################*************************************########################
 // #############################****LIST NEW BUSINESS****###############################################################
-import { Businesses } from "../models/business_model.js";
 export const listNewBusiness = async(req, res) => {
   try {
     const {
