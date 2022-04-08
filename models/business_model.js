@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
   occupation: {
     type: String,
   },
-  imgUrl: {
+  imgUrlArray: {
     type: Array,
   },
   ownerImg: {
