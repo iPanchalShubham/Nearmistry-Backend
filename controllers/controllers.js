@@ -10,12 +10,12 @@ import dotenv from "dotenv";
 //****FETCHING NEW ITEMS****
 export const getHomePage = async (req, res) => {
   const { page } = req.query;
-  const { labour } = req.query;
-  const { painter } = req.query;
-  const { helper } = req.query;
-  const { raj_mistri } = req.query;
-  const { welder } = req.query;
-  const { tileGraniteWorkers } = req.query;
+  // const { labour } = req.query;
+  // const { painter } = req.query;
+  // const { helper } = req.query;
+  // const { raj_mistri } = req.query;
+  // const { welder } = req.query;
+  // const { tileGraniteWorkers } = req.query;
   const { occupation } = req.query;
   const { lat } = req.query;
   const { lng } = req.query;
@@ -108,12 +108,6 @@ export const getHomePage = async (req, res) => {
        total = await User.countDocuments({
         occupation: {
           $in: [
-            `${labour}`,
-            `${painter}`,
-            `${helper}`,
-            `${raj_mistri}`,
-            `${welder}`,
-            `${tileGraniteWorkers},`,
             `${occupation}`,
           ],
         },
@@ -121,12 +115,6 @@ export const getHomePage = async (req, res) => {
        items = await User.find({
         occupation: {
           $in: [
-            `${labour}`,
-            `${painter}`,
-            `${helper}`,
-            `${raj_mistri}`,
-            `${welder}`,
-            `${tileGraniteWorkers}`,
             `${occupation}`,
           ],
         },
