@@ -1,7 +1,5 @@
 import { User } from "../models/items_model.js";
 import { Businesses } from "../models/business_model.js";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 // ****************************###############################################*************************************#########################
@@ -269,7 +267,10 @@ export const getInfo = async (_, res) => {
       {
         occupation: "Building material",
         numberOfPages: Math.ceil(totalBuildingMaterialShops / LIMIT),
-      },
+      },{
+        occupation: "Paints",
+        numberOfPages: Math.ceil(totalPaintShops / LIMIT),
+      }
     ]);
   } catch (e) {
     console.log(e.message);
