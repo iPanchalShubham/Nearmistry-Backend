@@ -19,22 +19,22 @@ const schema = mongoose.Schema({
   occupation: {
     type: String,
   },
-  imgUrl:{
-    type:String
+  imgUrlArray: {
+    type: Array,
   },
-  areaName:{
-    type:String
+  areaName: {
+    type: String,
   },
   location: {
     type: {
       type: String,
       enum: ["Point"],
-      required:true
+      required: true,
     },
-    coordinates:{
-        type:[Number],
-        required:true
-    }
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
   },
 });
 

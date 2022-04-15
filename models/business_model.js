@@ -23,6 +23,9 @@ const schema = new mongoose.Schema({
   areaName: {
     type: String,
   },
+  tags: {
+    type: String,
+  },
   location: {
     type: {
       type: String,
@@ -35,7 +38,6 @@ const schema = new mongoose.Schema({
     },
   },
 });
-
 
 //Declaring, assigning and exporting the volunteers_schema.
 export const Businesses = mongoose.model("Businesses", schema);
