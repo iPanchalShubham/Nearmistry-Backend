@@ -289,13 +289,13 @@ export const postNewUser = async (req, res) => {
       age,
       gender,
       phoneNumber,
-      imgUrl,
+      imgUrlArray,
       occupation,
       areaName,
       location,
     } = req.body;
     //  If there is any field that's not filled show this alert box.
-    //  if(!lName|!age|!gender|!phoneNumber|!imgUrl|!occupation|!areaName|!location){
+    //  if(!lName|!age|!gender|!phoneNumber|!imgUrlArray|!occupation|!areaName|!location){
     //      return res.status(400).json({message:"Please fill the required credentials!!"})
     //  }
     const phoneNum = await User.findOne({ phoneNumber: phoneNumber });
@@ -303,7 +303,7 @@ export const postNewUser = async (req, res) => {
     if (phoneNum) {
       return res.status(400).json({ message: "Phone number already in use!" });
     }
-    // if(!imgUrl){
+    // if(!imgUrlArray){
     //   return res.status(401).json({message:"Please try upload your image"})
     // }
     // if(!areaName){
@@ -317,7 +317,7 @@ export const postNewUser = async (req, res) => {
       age,
       gender,
       phoneNumber,
-      imgUrl,
+      imgUrlArray,
       occupation,
       areaName,
       location,
