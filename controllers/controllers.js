@@ -293,6 +293,7 @@ export const postNewUser = async (req, res) => {
       occupation,
       areaName,
       location,
+      tags
     } = req.body;
     //  If there is any field that's not filled show this alert box.
     //  if(!lName|!age|!gender|!phoneNumber|!imgUrlArray|!occupation|!areaName|!location){
@@ -321,6 +322,7 @@ export const postNewUser = async (req, res) => {
       occupation,
       areaName,
       location,
+      tags
     });
 
     await newUser.save();
@@ -355,6 +357,7 @@ export const listNewBusiness = async(req, res) => {
       ownerImg,
       areaName,
       location,
+      tags
     } = req.body;
     const newBusiness = new Businesses({
       bName,
@@ -365,6 +368,7 @@ export const listNewBusiness = async(req, res) => {
       ownerImg,
       areaName,
       location,
+      tags
     })
     await newBusiness.save();
      res.status(201).json({

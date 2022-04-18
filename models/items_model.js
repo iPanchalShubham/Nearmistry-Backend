@@ -25,6 +25,9 @@ const schema = mongoose.Schema({
   areaName: {
     type: String,
   },
+  tags:{
+    type:String,
+  },
   location: {
     type: {
       type: String,
