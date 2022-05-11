@@ -357,7 +357,8 @@ export const listNewBusiness = async(req, res) => {
       ownerImg,
       areaName,
       location,
-      tags
+      tags,
+      address
     } = req.body;
     const newBusiness = new Businesses({
       bName,
@@ -368,7 +369,8 @@ export const listNewBusiness = async(req, res) => {
       ownerImg,
       areaName,
       location,
-      tags
+      tags,
+      address
     })
     await newBusiness.save();
      res.status(201).json({

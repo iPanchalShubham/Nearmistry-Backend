@@ -26,6 +26,9 @@ const schema = new mongoose.Schema({
   tags: {
     type: String,
   },
+  address:{
+    type: String,
+  },
   location: {
     type: {
       type: String,
