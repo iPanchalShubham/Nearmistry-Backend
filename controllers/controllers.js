@@ -2,19 +2,13 @@ import { User } from "../models/items_model.js";
 import { Businesses } from "../models/business_model.js";
 import dotenv from "dotenv";
 
-// ****************************###############################################*************************************#########################
-// #########################################################################################################################################
+dotenv.config({ path: "../.env" });
 
-//****FETCHING NEW ITEMS****
-export const getHomePage = async (req, res) => {
+//FETCH ITEMS
+export const getProfessional = async (req, res) => {
   const { page } = req.query;
-  // const { labour } = req.query;
-  // const { painter } = req.query;
-  // const { helper } = req.query;
-  // const { raj_mistri } = req.query;
-  // const { welder } = req.query;
-  // const { tileGraniteWorkers } = req.query;
   const { occupation } = req.query;
+
   const { lat } = req.query;
   const { lng } = req.query;
   try {
@@ -50,9 +44,9 @@ export const getHomePage = async (req, res) => {
     // },
     //   ],
     // });
-    // ###################################################################GEOJSON ^^^^^^^^^^^^^^^^
+    // ########################################GEOJSON############
 
-    // ###################################################################GEOJSON #########################################
+    // ########################################GEOJSON############
 
     // const items = await User.find({
     //   occupation: {
@@ -82,7 +76,7 @@ export const getHomePage = async (req, res) => {
     //     ],
     //   },
     // })
-    // ###################################################################GEOJSON #########################################
+    // ##################################GEOJSON#########################################
     let total;
     let items;
     if(occupation == 'Tile Granite'|occupation == 'Labour contractor(Thekedaar)'|occupation == 'Wood works'|occupation == 'Welding'|occupation == 'Electrical'|occupation == 'Painter contractor(Thekedaar)'|occupation == 'Sanitary'|occupation == 'Paints'|occupation == 'Tile Granite contractor(Thekedaar)'|occupation == 'Building material'){
@@ -131,9 +125,7 @@ export const getHomePage = async (req, res) => {
   }
 };
 
-// ****************************###############################################*************************************########################
-// ########################################################################################################################################
-// ********\/\/\/\/\/\/\/*********GETTING -----> {occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)}
+// This function sends this "{occupation:"Labour",numberOfPages:Math.ceil(total/LIMIT)}" type of data
 
 export const getInfo = async (_, res) => {
   try {
@@ -277,9 +269,6 @@ export const getInfo = async (_, res) => {
   }
 };
 
-// ****************************###############################################*************************************########################
-// ########################################################################################################################################
-dotenv.config({ path: "../.env" });
 //****POSTING NEW ITEMS****
 export const postNewUser = async (req, res) => {
   try {
@@ -340,9 +329,7 @@ export const postNewUser = async (req, res) => {
   }
 };
 
-/*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE.  
-
-{ */
+/*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE :) */
 
 // ****************************###############################################*************************************########################
 // #############################****LIST NEW BUSINESS****###############################################################
@@ -384,60 +371,3 @@ export const listNewBusiness = async(req, res) => {
   }
 };
 
-// #######################################*******************************VOLUNTEER'S METHOD*********************############################
-// ****************************###############################################*************************************########################
-// ########################################################################################################################################
-
-// AUTHENTICATE NEW VOLUNTEERS
-// export const authenticateVolunteer = async (req, _) => {
-//   try {
-//     const { email, password } = req.body;
-//     if (!email | !password) {
-//       return console.log("please fill the required fields!");
-//     }
-//     const userFound = Volunteers.findOne({ email: email });
-//     if (userFound) {
-//       const passwordMatch = bcrypt.compare(password, userFound.password);
-//       if (passwordMatch) {
-//         return console.log("Volunteer identified!");
-//       } else {
-//         return console.log("Invalid creds!");
-//       }
-//     } else {
-//       return console.log("Invalid creds!");
-//     }
-//   } catch (error) {
-//     return console.log(error);
-//   }
-// };
-
-// ****************************###############################################*************************************########################
-// ########################################################################################################################################
-
-// REGISTER NEW VOLUNTEERS
-// export const postNewVolunteer = async (req, _) => {
-//   try {
-//     const { fName, lName, email, password, passwordConfirm } = req.body;
-//     if (!fName | !lName | !email | !password | !passwordConfirm) {
-//       return console.log("Please fill the required fields!");
-//     }
-
-//     const emailFound = await Volunteers.findOne({ email: email });
-//     const confirmationCode = jwt.sign({ email: email }, process.env.SECRET);
-//     if (emailFound) {
-//       return console.log("email already exists!!");
-//     } else {
-//       const volunteer = Volunteers({
-//         fName,
-//         lName,
-//         email,
-//         password,
-//         passwordConfirm,
-//         confirmationCode,
-//       });
-//       await volunteer.save();
-//     }
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
