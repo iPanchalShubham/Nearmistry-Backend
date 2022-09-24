@@ -9,74 +9,12 @@ export const getProfessional = async (req, res) => {
   const { page } = req.query;
   const { occupation } = req.query;
 
-  const { lat } = req.query;
-  const { lng } = req.query;
+
   try {
     const LIMIT = 9;
     const itemsToSkip = (Number(page) - 1) * LIMIT;
-    // ###################################################################GEOJSO ##################################################
-
-    /*
-        $near "sorts" the results to return, and that is always going to take more time than not sorting. So it depends on what you want. If "order" of "nearest" is important, then you use $near. If it is not, then use $geoWithin and a plain definition of a circle. Which is the only polygon the two share in common.
-        */
-    // const total = await User.countDocuments({
-    //   $and: [
-    //     {
-    //       occupation: {
-    //         $in: [
-    //           `${labour}`,
-    //           `${painter}`,
-    //           `${helper}`,
-    //           `${raj_mistri}`,
-    //           `${welder}`,
-    //           `${tileGraniteWorkers},`,
-    //           `${occupation}`,
-    //         ],
-    //       },
-    //     },
-    // {
-    //   location: {
-    //     $geoWithin: {
-    //       $centerSphere: [[`${lat}`, `${lng}`], 4.3496],
-    //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
-    //     },
-    //   },
-    // },
-    //   ],
-    // });
-    // ########################################GEOJSON############
-
-    // ########################################GEOJSON############
-
-    // const items = await User.find({
-    //   occupation: {
-    //     $and: [
-    //       {
-    //         occupation: {
-    //           $in: [
-    //             `${labour}`,
-    //             `${painter}`,
-    //             `${helper}`,
-    //             `${raj_mistri}`,
-    //             `${welder}`,
-    //             `${tileGraniteWorkers},`,
-    //             `${occupation}`,
-    //           ],
-    //         },
-    //       },
-    // {
-    //   location: {
-    //     $geoWithin: {
-    //       /*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE :)*/
-    //       $centerSphere: [[`${lng}`, `${lat}`], 4.3496],
-    //       //   quering documents that lies within the 4.3496 miles or 7.4 km radius with respect to the user's location i.e (lat,lng)
-    //     },
-    //   },
-    // },
-    //     ],
-    //   },
-    // })
-    // ##################################GEOJSON#########################################
+    
+  
     let total;
     let items;
     if(occupation == 'Tile Granite'|occupation == 'Labour contractor(Thekedaar)'|occupation == 'Wood works'|occupation == 'Welding'|occupation == 'Electrical'|occupation == 'Painter contractor(Thekedaar)'|occupation == 'Sanitary'|occupation == 'Paints'|occupation == 'Tile Granite contractor(Thekedaar)'|occupation == 'Building material'){
@@ -293,13 +231,6 @@ export const postNewUser = async (req, res) => {
     if (phoneNum) {
       return res.status(400).json({ message: "Phone number already in use!" });
     }
-    // if(!imgUrlArray){
-    //   return res.status(401).json({message:"Please try upload your image"})
-    // }
-    // if(!areaName){
-    //   return res.status(401).json({message:"Fill address again"})
-    // }
-    /*NOW WE'LL USE CLOUDINARY OR PLATFORMS LIKE S3 FOR IMAGE STORAGE AND WILL NOT USE BASE64 FOR ENCODING OF OUR IMAGE TO SAVE INTO OUR DATABASE */
     //         //Save new user in our database
     const newUser = new User({
       fName,
@@ -319,11 +250,7 @@ export const postNewUser = async (req, res) => {
       message: "Registration succsessful",
     });
 
-    //     }
-    //     ).catch(error => {
-    //         // error handeling
-    //         res.send(error)
-    //     })
+   
   } catch (e) {
     console.log(e);
   }
@@ -331,8 +258,7 @@ export const postNewUser = async (req, res) => {
 
 /*FUN FACT: LONGITUDE COMES FIRST IN A GEOJSON COORDINATE ARRAY SCHEMA NOT LATITUDE :) */
 
-// ****************************###############################################*************************************########################
-// #############################****LIST NEW BUSINESS****###############################################################
+// Function to LIST NEW BUSINESS
 export const listNewBusiness = async(req, res) => {
   try {
     const {
